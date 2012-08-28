@@ -5,8 +5,13 @@ import org.jinstagram.auth.model.OAuthConfig;
 import org.jinstagram.auth.model.OAuthConstants;
 import org.jinstagram.auth.model.OAuthRequest;
 import org.jinstagram.auth.model.Token;
+import org.jinstagram.auth.model.TokenWithUserInfo;
 import org.jinstagram.auth.model.Verifier;
+import org.jinstagram.entity.users.basicinfo.UserInfoLogin;
+import org.jinstagram.entity.users.basicinfo.UserInfoLoginResponse;
 import org.jinstagram.http.Response;
+
+import com.google.gson.Gson;
 
 public class InstagramService {
 	private static final String VERSION = "1.0";
@@ -25,11 +30,8 @@ public class InstagramService {
 		this.api = api;
 		this.config = config;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public Token getAccessToken(Token requestToken, Verifier verifier) {
+	
+	private String getAccessTokenResponse(Token requestToken, Verifier verifier) {
 		OAuthRequest request = new OAuthRequest(api.getAccessTokenVerb(),
 				api.getAccessTokenEndpoint());
 
@@ -49,8 +51,25 @@ public class InstagramService {
 		}
 
 		Response response = request.send();
+		
+		return response.getBody();
+	}
 
-		return api.getAccessTokenExtractor().extract(response.getBody());
+	/**
+	 * {@inheritDoc}
+	 */
+	public Token getAccessToken(Token requestToken, Verifier verifier) {
+		String response = getAccessTokenResponse(requestToken, verifier);
+
+		return api.getAccessTokenExtractor().extract(response);
+	}
+	
+	public TokenWithUserInfo getAccessTokenWithUser(Token requestToken, Verifier verifier) {
+		String response = getAccessTokenResponse(requestToken, verifier);
+		Token token = api.getAccessTokenExtractor().extract(response);
+		Gson gson = new Gson();
+		UserInfoLoginResponse uilr = gson.fromJson(response, UserInfoLoginResponse.class);
+		return new TokenWithUserInfo(token, uilr.getUser());
 	}
 
 	/**
