@@ -129,6 +129,13 @@ public class Instagram {
 
 		return recentMediaFeed;
 	}
+	
+	public MediaFeed getMediaFeedFromUrl(String url) throws InstagramException {
+		Preconditions.checkValidUrl(url, "Url is invalid.");
+		
+		MediaFeed mediaFeed = this.createInstagramObject(url, MediaFeed.class);
+		return mediaFeed;
+	}
 
 	/**
 	 * Get the authenticated user's list of media they've liked.
@@ -513,6 +520,28 @@ public class Instagram {
 		T object = createObjectFromResponse(clazz, response.getBody());
 
 		return object;
+	}
+	
+	private <T> T createInstagramObject(String url, Class<T> clazz) throws InstagramException {
+		Response response = getApiResponse(url);
+		
+		T object = createObjectFromResponse(clazz, response.getBody());
+		
+		return object;
+	}
+	
+	/**
+	 * Get response from Instagram.
+	 *
+	 * @param url The url
+	 * @return Response object.
+	 */	
+	private Response getApiResponse(String url) {
+		Response response = null;
+		OAuthRequest request = new OAuthRequest(Verbs.GET, url);
+		response = request.send();
+
+		return response;
 	}
 
 	/**
