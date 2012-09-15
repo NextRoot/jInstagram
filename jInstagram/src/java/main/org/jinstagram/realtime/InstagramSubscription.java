@@ -10,6 +10,7 @@ import org.jinstagram.utils.Preconditions;
 import com.google.gson.Gson;
 
 public class InstagramSubscription {
+	@SuppressWarnings("unused")
 	private String aspect;
 
 	private String callback;

@@ -7,7 +7,6 @@ import org.jinstagram.auth.model.OAuthRequest;
 import org.jinstagram.auth.model.Token;
 import org.jinstagram.auth.model.TokenWithUserInfo;
 import org.jinstagram.auth.model.Verifier;
-import org.jinstagram.entity.users.basicinfo.UserInfoLogin;
 import org.jinstagram.entity.users.basicinfo.UserInfoLoginResponse;
 import org.jinstagram.http.Response;
 
