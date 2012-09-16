@@ -356,7 +356,7 @@ public class Instagram {
 	 * @return a LikesFeed object.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public LikesFeed getUserLikes(long mediaId) throws InstagramException {
+	public LikesFeed getUserLikes(String mediaId) throws InstagramException {
 		String apiMethod = String.format(Methods.LIKES_BY_MEDIA_ID, mediaId);
 		LikesFeed feed = createInstagramObject(Verbs.GET, LikesFeed.class, apiMethod, null);
 
@@ -370,7 +370,7 @@ public class Instagram {
 	 * @return a LikesFeed object.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public LikesFeed setUserLike(long mediaId) throws InstagramException {
+	public LikesFeed setUserLike(String mediaId) throws InstagramException {
 		String apiMethod = String.format(Methods.LIKES_BY_MEDIA_ID, mediaId);
 		LikesFeed feed = createInstagramObject(Verbs.POST, LikesFeed.class, apiMethod, null);
 
@@ -384,7 +384,7 @@ public class Instagram {
 	 * @return a LikesFeed object.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public LikesFeed deleteUserLike(long mediaId) throws InstagramException {
+	public LikesFeed deleteUserLike(String mediaId) throws InstagramException {
 		String apiMethod = String.format(Methods.LIKES_BY_MEDIA_ID, mediaId);
 		LikesFeed feed = createInstagramObject(Verbs.DELETE, LikesFeed.class, apiMethod, null);
 
