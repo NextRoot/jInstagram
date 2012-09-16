@@ -259,7 +259,7 @@ public class Instagram {
 	 * @return a mediaFeed object.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public MediaInfoFeed getMediaInfo(long mediaId) throws InstagramException {
+	public MediaInfoFeed getMediaInfo(String mediaId) throws InstagramException {
 		Preconditions.checkNotNull(mediaId, "mediaId cannot be null.");
 
 		String apiMethod = String.format(Methods.MEDIA_BY_ID, mediaId);
@@ -306,7 +306,7 @@ public class Instagram {
 	 * @return a MediaCommentsFeed object.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public MediaCommentsFeed getMediaComments(long mediaId) throws InstagramException {
+	public MediaCommentsFeed getMediaComments(String mediaId) throws InstagramException {
 		String apiMethod = String.format(Methods.MEDIA_COMMENTS, mediaId);
 		MediaCommentsFeed feed = createInstagramObject(Verbs.GET, MediaCommentsFeed.class, apiMethod, null);
 
@@ -322,7 +322,7 @@ public class Instagram {
 	 * @return a MediaCommentResponse feed.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public MediaCommentResponse setMediaComments(long mediaId, String text) throws InstagramException {
+	public MediaCommentResponse setMediaComments(String mediaId, String text) throws InstagramException {
 		Map<String, String> params = new HashMap<String, String>();
 
 		params.put(QueryParam.TEXT, text);
@@ -342,7 +342,7 @@ public class Instagram {
 	 * @return a MediaCommentResponse feed.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public MediaCommentResponse deleteMediaCommentById(long mediaId, long commentId) throws InstagramException {
+	public MediaCommentResponse deleteMediaCommentById(String mediaId, long commentId) throws InstagramException {
 		String apiMethod = String.format(Methods.DELETE_MEDIA_COMMENTS, mediaId, commentId);
 		MediaCommentResponse feed = createInstagramObject(Verbs.DELETE, MediaCommentResponse.class, apiMethod, null);
 
