@@ -412,9 +412,9 @@ public class Instagram {
 	 * @return a TagMediaFeed object.
 	 * @throws InstagramException if any error occurs.
 	 */
-	public TagMediaFeed getRecentMediaTags(String tagName) throws InstagramException {
+	public MediaFeed getRecentMediaTags(String tagName) throws InstagramException {
 		String apiMethod = String.format(Methods.TAGS_RECENT_MEDIA, tagName);
-		TagMediaFeed feed = createInstagramObject(Verbs.GET, TagMediaFeed.class, apiMethod, null);
+		MediaFeed feed = createInstagramObject(Verbs.GET, MediaFeed.class, apiMethod, null);
 
 		return feed;
 	}
